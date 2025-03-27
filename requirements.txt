@@ -1,0 +1,10 @@
+# Core dependencies
+python-dotenv==0.21.0
+web3==5.31.3
+
+# LLM/Eliza dependencies
+transformers==4.26.1
+torch==2.0.1  # Required for transformers
+
+# Optional (for better HTTP requests)
+requests==2.28.1

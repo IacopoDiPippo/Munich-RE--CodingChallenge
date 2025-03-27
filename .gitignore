@@ -30,3 +30,27 @@
 *.exe
 *.out
 *.app
+
+# Environment files
+.env
+.env.*
+
+# Text files to ignore
+file.txt
+
+# Python-specific ignores
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+venv/
+ENV/
+
+# IDE specific files
+.vscode/
+.idea/
+
+# System files
+.DS_Store
+Thumbs.db
