@@ -5,12 +5,25 @@ import os
 
 load_dotenv()
 
+print(f"Private key type: {type(os.getenv('PRIVATE_KEY'))}")
+print(f"Key length: {len(os.getenv('PRIVATE_KEY'))}")
+print(f"First/last chars: '{os.getenv('PRIVATE_KEY')[0]}'/'{os.getenv('PRIVATE_KEY')[-1]}'")
+
+
 class BlockchainHandler:
     def __init__(self):
         self.w3 = Web3(Web3.HTTPProvider(
             f"https://eth-sepolia.g.alchemy.com/v2/{os.getenv('ALCHEMY_API_KEY')}"
         ))
         self.chain_id = 11155111  # Sepolia
+        private_key = os.getenv('PRIVATE_KEY')
+        print(f"Raw key: '{private_key}'")  # Check for hidden characters
+        assert private_key.startswith('0x'), "Private key must start with 0x"
+        assert len(private_key) == 66, "Private key must be 64 hex chars + 0x prefix"
+        self.account = self.w3.eth.account.from_key(private_key)
+        private_key = os.getenv('PRIVATE_KEY').strip()  # Remove whitespace
+        private_key = private_key.replace('"', '').replace("'", "")  # Remove quotes
+        self.account = self.w3.eth.account.from_key(private_key)
         self.account = self.w3.eth.account.from_key(os.getenv('PRIVATE_KEY'))
 
     def send_transaction(self, recipient, amount_eth):

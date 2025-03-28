@@ -33,7 +33,7 @@
 
 # Environment files
 .env
-.env.*
+#.env.*
 
 # Text files to ignore
 file.txt
